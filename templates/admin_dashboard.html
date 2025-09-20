@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Admin Dashboard</h2>
+
+  <!-- Sales Report -->
+  <section>
+    <h3>Sales Summary</h3>
+    <ul>
+      <li><strong>Total Revenue:</strong> €{{ '%.2f'|format(total_revenue) }}</li>
+      <li><strong>Total Orders:</strong> {{ total_orders }}</li>
+      <li><strong>Total Items Sold:</strong> {{ total_items }}</li>
+      <li><strong>Best Seller:</strong>
+        {% if best_seller %}
+          {{ best_seller[0] }} ({{ best_seller[1] }} sold)
+        {% else %}
+          N/A
+        {% endif %}
+      </li>
+    </ul>
+  </section>
+
+  <!-- Orders Section -->
+  <section style="margin-top:2rem;">
+    <h3>Recent Orders</h3>
+    {% if orders %}
+      {% for order in orders %}
+        <div class="order-block">
+          <p><strong>Order #{{ order.id }}</strong> — {{ order.customer_name }} ({{ order.customer_email }})</p>
+          <p><em>Total: €{{ '%.2f'|format(order.total_price) }} | Date: {{ order.timestamp.strftime('%Y-%m-%d %H:%M') }}</em></p>
+
+          <!-- Order line-items -->
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Unit Price (€)</th>
+                <th>Subtotal (€)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in order.items %}
+                <tr>
+                  <td>{{ item.product.name }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ '%.2f'|format(item.product.price) }}</td>
+                  <td>{{ '%.2f'|format(item.quantity * item.product.price) }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <hr>
+      {% endfor %}
+    {% else %}
+      <p>No orders yet.</p>
+    {% endif %}
+  </section>
+
+  <!-- Messages Section -->
+  <section style="margin-top: 2rem;">
+    <h3>Customer Messages</h3>
+    {% if messages %}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for msg in messages %}
+            <tr>
+              <td>{{ msg.name }}</td>
+              <td>{{ msg.email }}</td>
+              <td>{{ msg.message }}</td>
+              <td>{{ msg.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No messages received yet.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

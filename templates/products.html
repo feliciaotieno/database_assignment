@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Our Products</h2>
+
+  <!-- Sort Dropdown (always visible) -->
+  <form method="get" action="{{ url_for('view_products') }}" class="sort-form">
+    <label for="sort">Sort by:</label>
+    <select name="sort" id="sort" onchange="this.form.submit()">
+      <option value="name_asc" {% if sort_option == 'name_asc' %}selected{% endif %}>Name (A–Z)</option>
+      <option value="name_desc" {% if sort_option == 'name_desc' %}selected{% endif %}>Name (Z–A)</option>
+      <option value="price_asc" {% if sort_option == 'price_asc' %}selected{% endif %}>Price (Low → High)</option>
+      <option value="price_desc" {% if sort_option == 'price_desc' %}selected{% endif %}>Price (High → Low)</option>
+      <option value="stock_asc" {% if sort_option == 'stock_asc' %}selected{% endif %}>Stock (Low → High)</option>
+      <option value="stock_desc" {% if sort_option == 'stock_desc' %}selected{% endif %}>Stock (High → Low)</option>
+    </select>
+  </form>
+
+  <!-- Search Results -->
+  {% if query is defined %}
+    <section class="search-results">
+      <h3>Search results for "{{ query }}":</h3>
+      {% if results %}
+        <div class="product-grid">
+          {% for product in results %}
+            <div class="product-card">
+              {% if product.image_url %}
+                <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}">
+              {% endif %}
+              <h4>{{ product.name }}</h4>
+              <p>{{ product.description }}</p>
+              <p><strong>€{{ '%.2f'|format(product.price) }}</strong></p>
+              <p><em>Stock: {{ product.stock }}</em></p>
+              <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                <button type="submit">Add to Cart</button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No products found.</p>
+      {% endif %}
+      <hr>
+    </section>
+  {% endif %}
+
+  <!-- Categories & Products -->
+  {% for category in categories %}
+    <section class="category-block 
+      {% if 'Books' in category.name %}books{% endif %}
+      {% if 'Groceries' in category.name %}groceries{% endif %}
+      {% if 'Health' in category.name %}health{% endif %}
+      {% if 'Home' in category.name %}home{% endif %}
+    ">
+    
+      {% if category.banner_url %}
+        <div class="category-banner">
+          <img src="{{ url_for('static', filename=category.banner_url) }}" alt="{{ category.name }}">
+          <div class="banner-title">{{ category.name }}</div>
+        </div>
+      {% else %}
+        <h3>{{ category.name }}</h3>
+      {% endif %}
+
+      {% if category.products %}
+        <div class="product-grid">
+          {% for product in category.products %}
+            <div class="product-card">
+              {% if product.image_url %}
+                <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}">
+              {% endif %}
+              <h4>{{ product.name }}</h4>
+              <p>{{ product.description }}</p>
+              <p><strong>€{{ '%.2f'|format(product.price) }}</strong></p>
+              <p><em>Stock: {{ product.stock }}</em></p>
+              <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                <button type="submit">Add to Cart</button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>No products in this category yet.</p>
+      {% endif %}
+    </section>
+    <hr>
+  {% endfor %}
+</div>
+{% endblock %}

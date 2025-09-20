@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Contact Us</h2>
+
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-success">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Contact Info -->
+  <div class="about-section">
+    <h3>Get in Touch</h3>
+    <p>
+      Have questions, feedback, or need help with your order?  
+      We’d love to hear from you. Our team is here to make your shopping experience as smooth as possible.
+    </p>
+    <ul>
+      <li><strong>Email:</strong> support@shopeasy.ie</li>
+      <li><strong>Phone:</strong> +353 1 234 5678</li>
+      <li><strong>Hours:</strong> Mon–Fri, 9am – 6pm</li>
+    </ul>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="about-section">
+    <h3>Send Us a Message</h3>
+    <form method="POST">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

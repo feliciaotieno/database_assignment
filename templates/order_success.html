@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Order Confirmation</h2>
+  <p>Thank you, <strong>{{ order.customer_name }}</strong>! 🎉</p>
+  <p>Your order <strong>#{{ order.id }}</strong> has been placed successfully.</p>
+
+  <h3>Order Details</h3>
+  <ul>
+    <li><strong>Email:</strong> {{ order.customer_email }}</li>
+    <li><strong>Address:</strong> {{ order.customer_address }}</li>
+    <li><strong>Phone:</strong> {{ order.customer_phone or "Not provided" }}</li>
+    <li><strong>Date:</strong> {{ order.timestamp.strftime('%d %B %Y, %H:%M') }}</li>
+  </ul>
+
+  <h3>Items Ordered</h3>
+  <table class="cart-table">
+    <thead>
+      <tr><th>Product</th><th>Qty</th><th>Subtotal</th></tr>
+    </thead>
+    <tbody>
+      {% for item in order.items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>€{{ '%.2f'|format(item.product.price * item.quantity) }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p><strong>Total Paid: €{{ '%.2f'|format(order.total_price) }}</strong></p>
+
+  <a href="{{ url_for('view_products') }}" class="btn">Continue Shopping</a>
+</div>
+{% endblock %}

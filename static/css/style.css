@@ -1,0 +1,417 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+h2, h3, h4 {
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+/* ===== Site Header ===== */
+.site-header {
+  background: #004080;
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffcc00;
+}
+
+.nav-search {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.nav-search input {
+  padding: 0.4rem;
+  border: none;
+  border-radius: 4px;
+}
+
+.nav-search button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: #ffcc00;
+  color: #333;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-search button:hover {
+  background: #ff9900;
+}
+
+/* ===== Category Banners ===== */
+.category-banner {
+  position: relative;
+  margin: 2rem 0 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.category-banner img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
+.category-banner .banner-title {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== Products ===== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.3s ease;
+  background: #ffffff;
+}
+
+.books .product-card,
+.health .product-card {
+  background: linear-gradient(135deg, #d3ebfa, #e8f6ff); 
+}
+
+.groceries .product-card,
+.home .product-card {
+  background: linear-gradient(135deg, #fbe8c6, #fff3dc); 
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.product-card h4 {
+  margin: 0.5rem 0;
+  color: #004080;
+}
+
+.product-card button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #004080;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.product-card button:hover {
+  background: #003366;
+  transform: translateY(-2px);
+}
+
+/* ===== Forms ===== */
+form label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus, form textarea:focus {
+  outline: none;
+  border-color: #004080;
+  box-shadow: 0 0 8px rgba(0,64,128,0.2);
+}
+
+form button {
+  background: linear-gradient(135deg, #004080, #0066cc);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+form button:hover {
+  background: #003366;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ===== Tables ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+table th, table td {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+table th {
+  background: #f0f0f0;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.cart-table tbody tr:nth-child(odd) {
+  background: #b0bdd5; /* light blue */
+}
+
+.cart-table tbody tr:nth-child(even) {
+  background: #fafafa; /* light grey */
+}
+
+/* ===== Checkout Styling ===== */
+.checkout-summary {
+  background: linear-gradient(135deg, #b0bdd5, #d3e0f2);
+  border-radius: 10px;
+  padding: 1.5rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.checkout-summary h3 {
+  margin-bottom: 1rem;
+  color: #004080;
+  border-bottom: 2px solid #004080;
+  padding-bottom: 0.5rem;
+}
+
+.checkout-summary p strong {
+  display: inline-block;
+  background: #004080;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.checkout-form {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.checkout-form h3 {
+  margin-bottom: 1rem;
+  color: #004080;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Admin Dashboard Styling ===== */
+.order-block {
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.order-block h4 {
+  margin-bottom: 0.5rem;
+  color: #004080;
+}
+
+.order-block p {
+  margin: 0.3rem 0;
+}
+
+.order-block table {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+}
+
+.order-block table th {
+  background: #004080;
+  color: #fff;
+  text-align: center;
+}
+
+.order-block table td {
+  text-align: center;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: #004080;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+}
+
+/* ===== Flash Messages ===== */
+.flashes {
+  margin: 1rem 0;
+  padding: 0.8rem;
+  list-style: none;
+  border: 1px solid #ddd;
+  background: #fff9c4;
+  border-radius: 4px;
+}
+
+.flashes li {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.flash-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.flash-success p {
+  margin: 0;
+}
+
+/* ===== Layout Fix (Sticky Footer) ===== */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ===== About Page Styling ===== */
+.about-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #d3ebfa, #e8f6ff);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.about-section h3 {
+  margin-bottom: 0.8rem;
+  color: #004080;
+  border-left: 4px solid #004080;
+  padding-left: 0.6rem;
+}
+
+.about-section p {
+  margin-bottom: 0.8rem;
+  line-height: 1.7;
+}
+
+.about-section ul {
+  margin: 0.5rem 0 1rem 1.5rem;
+}
+
+/* ===== Contact Page Styling ===== */
+.contact-section {
+  background: linear-gradient(135deg, #d3ebfa, #e8f6ff);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Admin Dashboard Summary ===== */
+.admin-summary {
+  background: linear-gradient(135deg, #d3ebfa, #e8f6ff);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
